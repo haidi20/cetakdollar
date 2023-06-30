@@ -1,20 +1,19 @@
 @extends('layouts.master')
 
 @section('content')
-    @include('pages.setting.partials.role-modal')
+    @include('pages.setting.partials.feature-modal')
     <div class="page-heading">
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Grup User</h3>
+                    <h3>Fitur</h3>
                     {{-- <p class="text-subtitle text-muted">For user to check they list</p> --}}
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            {{-- <li class="breadcrumb-item"><a href="{{ route('setting.permission.index') }}">Fitur</a>
-                        </li> --}}
-                            <li class="breadcrumb-item active" aria-current="page">Grup User</li>
+                            {{-- <li class="breadcrumb-item"><a href="#">Pengaturan</a></li> --}}
+                            <li class="breadcrumb-item active" aria-current="page">Fitur</li>
                         </ol>
                     </nav>
                 </div>
@@ -23,23 +22,66 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    <span class="fs-4 fw-bold">Data Grup User</span>
-                    @can('tambah grup pengguna')
-                        <button onclick="onCreate()" class="btn btn-sm btn-success shadow-sm float-end ml-2" id="addData"
-                            data-toggle="modal">
-                            <i class="fas fa-plus text-white-50"></i> Tambah Grup User
-                        </button>
-                    @endcan
+                    Data Fitur
+                    <button onclick="onCreate()" class="btn btn-sm btn-success shadow-sm float-end" id="addData"
+                        data-toggle="modal">
+                        <i class="fas fa-plus text-white-50"></i> Tambah Fitur
+                    </button>
                 </div>
-
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="table-responsive">
-                                {!! $html->table(['class' => 'table table-striped table-bordered']) !!}
-                            </div>
-                        </div>
+                    {{-- <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        {!! $html->table(['class' => 'table table-striped table-bordered']) !!}
                     </div>
+                </div>
+            </div> --}}
+                    <table class="table table-striped dataTable" id="table1">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Nama</th>
+                                <th>Deskripsi</th>
+                                <th width="20%">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($features as $feature)
+                                <tr>
+                                    <td>
+                                        {{ $loop->iteration }}
+                                    </td>
+                                    <td>
+                                        {{ $feature->name }}
+                                    </td>
+                                    <td>
+                                        {{ $feature->description }}
+                                    </td>
+                                    <td class="flex flex-row justify-content-around">
+                                        @can('detail fitur')
+                                            <a href="{{ route('permission.index', ['featureId' => $feature->id]) }}"
+                                                class="btn btn-sm btn-primary">Detail
+                                            </a>
+                                        @endcan
+                                        @can('ubah fitur')
+                                            @if ($feature->created_by == auth()->user()->id)
+                                                <a href="javascript:void(0)" onclick="onEdit({{ $feature }})"
+                                                    class="btn btn-sm btn-info">Ubah
+                                                </a>
+                                            @endif
+                                        @endcan
+                                        @can('hapus fitur')
+                                            @if ($feature->created_by == auth()->user()->id)
+                                                <a href="javascript:void(0)" onclick="onDelete({{ $feature }})"
+                                                    class="btn btn-sm btn-danger">Hapus
+                                                </a>
+                                            @endif
+                                        @endcan
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
@@ -48,41 +90,34 @@
 @endsection
 
 @section('script')
-    {!! $html->scripts() !!}
+    {{-- <script src="assets/static/js/components/dark.js"></script>
+<script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+
+<!-- Need: Apexcharts -->
+<script src="assets/extensions/apexcharts/apexcharts.min.js"></script>
+<script src="assets/static/js/pages/dashboard.js"></script> --}}
+    {{-- {!! $html->scripts() !!} --}}
     <script>
-        const initialState = {
-            roles: [],
-        };
-
-        let state = {
-            ...initialState
-        };
-
         $(document).ready(function() {
             $('.dataTable').DataTable();
 
-            state.roles = {!! json_encode($roles) !!};
             send();
         });
 
         function onCreate() {
             clearForm();
-            $("#titleForm").html("Tambah Grup Pengguna");
+            $("#titleForm").html("Tambah Fitur");
             onModalAction("formModal", "show");
-        }
-
-        function onDetail(id) {
-            onModalAction("formDetailModal", "show");
         }
 
         function onEdit(data) {
             clearForm();
+
             $("#id").val(data.id);
             $("#name").val(data.name);
-            $("#email").val(data.email);
-            $("#role_id").val(data.role_id).trigger("change");
+            $("#description").val(data.description);
 
-            $("#titleForm").html("Ubah Pengguna");
+            $("#titleForm").html("Ubah Fitur");
             onModalAction("formModal", "show");
         }
 
@@ -92,7 +127,7 @@
                 let fd = new FormData(this);
 
                 $.ajax({
-                    url: "{{ route('role.store') }}",
+                    url: "{{ route('feature.store') }}",
                     method: 'POST',
                     data: fd,
                     cache: false,
@@ -121,8 +156,9 @@
                                 title: responses.message
                             });
 
-                            window.LaravelDataTables["dataTableBuilder"].ajax.reload(
-                                function(json) {});
+                            // window.LaravelDataTables["dataTableBuilder"].ajax.reload(
+                            //     function(json) {});
+                            window.location.reload();
                         }
                     },
                     error: function(err) {
@@ -151,7 +187,7 @@
         function onDelete(data) {
             Swal.fire({
                 title: 'Perhatian!!!',
-                html: `Anda yakin ingin hapus data pengguna <h2><b> ${data.name} </b> ?</h2>`,
+                html: `Anda yakin ingin hapus data fitur <h2><b> ${data.name} </b> ?</h2>`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -161,7 +197,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{ route('role.delete') }}",
+                        url: "{{ route('feature.delete') }}",
                         method: 'DELETE',
                         dataType: 'json',
                         data: {
@@ -179,15 +215,13 @@
                                     toast.addEventListener('mouseleave', Swal.resumeTimer)
                                 }
                             });
-                            if (responses.success == true) {
-                                Toast.fire({
-                                    icon: 'success',
-                                    title: responses.message
-                                });
+                            $('#formModal').modal('hide');
+                            Toast.fire({
+                                icon: 'success',
+                                title: responses.message
+                            });
 
-                                window.LaravelDataTables["dataTableBuilder"].ajax.reload(
-                                    function(json) {});
-                            }
+                            window.location.reload();
                         },
                         error: function(err) {
                             // console.log(err.responseJSON.message);
@@ -214,7 +248,9 @@
         }
 
         function clearForm() {
-            //
+            $("#id").val("");
+            $("#name").val("");
+            $("#description").val("");
         }
     </script>
 @endsection

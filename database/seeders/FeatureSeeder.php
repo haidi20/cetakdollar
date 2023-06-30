@@ -28,6 +28,21 @@ class FeatureSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             [
+                "name" => "Grup Pengguna", "description" => null,  'created_by' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                "name" => "Fitur", "description" => null,  'created_by' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                "name" => "Hak Akses", "description" => null,  'created_by' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
                 "name" => "Log", "description" => null,  'created_by' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),

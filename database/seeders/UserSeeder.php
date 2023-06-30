@@ -20,7 +20,6 @@ class UserSeeder extends Seeder
             'email' => 'administrator@email.com',
             'password' => Hash::make('samarinda'),
             'role_id' => 1,
-            'status' => true,
         ]);
 
         $administrator->assignRole('administrator');
@@ -28,19 +27,17 @@ class UserSeeder extends Seeder
         $operator = User::create([
             'name' => 'operator',
             'email' => 'operator@email.com',
-            'password' => Hash::make('samarinda'),
+            'password' => Hash::make('operator123'),
             'role_id' => 2,
-            'status' => true,
         ]);
 
         $operator->assignRole('operator');
 
         $user = User::create([
-            'name' => 'arini',
-            'email' => 'user@email.com',
-            'password' => Hash::make('samarinda'),
+            'name' => 'kokom',
+            'email' => 'kokom@email.com',
+            'password' => Hash::make('kokom123'),
             'role_id' => 3,
-            'status' => true,
         ]);
 
         $user->assignRole('user');

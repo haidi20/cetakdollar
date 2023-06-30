@@ -30,17 +30,6 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="location_id" class="col-sm-4 col-form-label">Lokasi </label>
-                        <div class="col-sm-8">
-                            <select id="location_id" name="location_id" class="select2 form-select" style="width: 100%">
-                                <option value="">Pilih Lokasi</option>
-                                @foreach ($locations as $location)
-                                    <option value="{{ $location->id }}">{{ $location->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label for="role_id" class="col-sm-4 col-form-label">Grup Pengguna </label>
                         <div class="col-sm-8">
                             <select id="role_id" name="role_id" class="select2 form-select" style="width: 100%">

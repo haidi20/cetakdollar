@@ -25,7 +25,7 @@
                 <div class="card-header">
                     {{-- <span class="fs-4 fw-bold">Data Karyawan</span> --}}
                     @can('lihat grup pengguna')
-                        <a href="{{ route('setting.role.index') }}" class="btn btn-sm btn-primary shadow-sm float-end ml-2"
+                        <a href="{{ route('role.index') }}" class="btn btn-sm btn-primary shadow-sm float-end ml-2"
                             id="addData" data-toggle="modal">
                             Grup Pengguna
                         </a>
@@ -101,7 +101,7 @@
                 let fd = new FormData(this);
 
                 $.ajax({
-                    url: "{{ route('setting.user.store') }}",
+                    url: "{{ route('user.store') }}",
                     method: 'POST',
                     data: fd,
                     cache: false,
@@ -170,7 +170,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{ route('setting.user.delete') }}",
+                        url: "{{ route('user.delete') }}",
                         method: 'DELETE',
                         dataType: 'json',
                         data: {

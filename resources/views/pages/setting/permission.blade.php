@@ -12,7 +12,7 @@
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('setting.feature.index') }}">Fitur</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('feature.index') }}">Fitur</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Hak Akses</li>
                         </ol>
                     </nav>
@@ -27,7 +27,7 @@
                         data-toggle="modal">
                         <i class="fas fa-plus text-white-50"></i> Tambah Hak Akses
                     </button>
-                    <a href="{{ route('setting.feature.index') }}" class="btn btn-sm btn-info shadow-sm float-end"
+                    <a href="{{ route('feature.index') }}" class="btn btn-sm btn-info shadow-sm float-end"
                         data-toggle="modal">
                         <i class="fas fa-angle-left text-white-50"></i> Kembali
                     </a>
@@ -61,8 +61,8 @@
                                             <a href="javascript:void(0)" onclick="onDelete({{ $permission }})"
                                                 class="btn btn-sm btn-danger">Hapus
                                             </a>
-                                        </td>
-                                    @endcan
+                                        @endcan
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -112,7 +112,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{ route('setting.permission.delete') }}",
+                        url: "{{ route('permission.delete') }}",
                         method: 'DELETE',
                         dataType: 'json',
                         data: {
@@ -130,14 +130,14 @@
                                     toast.addEventListener('mouseleave', Swal.resumeTimer)
                                 }
                             });
-                             $('#formModal').modal('hide');
-                        Toast.fire({
-                            icon: 'success',
-                            title: responses.message
-                        });
+                            $('#formModal').modal('hide');
+                            Toast.fire({
+                                icon: 'success',
+                                title: responses.message
+                            });
 
-                        window.LaravelDataTables["dataTableBuilder"].ajax.reload(
-                        function(json) {});
+                            window.LaravelDataTables["dataTableBuilder"].ajax.reload(
+                                function(json) {});
                         },
                         error: function(err) {
                             // console.log(err.responseJSON.message);
@@ -169,7 +169,7 @@
                 let fd = new FormData(this);
 
                 $.ajax({
-                    url: "{{ route('setting.permission.store') }}",
+                    url: "{{ route('permission.store') }}",
                     method: 'POST',
                     data: fd,
                     cache: false,

@@ -33,7 +33,18 @@ class UserController extends Controller
         if ($datatables->getRequest()->ajax()) {
             $userRoleId = auth()->user()->role_id;
             $users = User::query()
-                ->select('users.id', 'users.name', 'users.role_id', 'users.email', 'roles.name as role_name')
+                ->select(
+                    'users.id',
+                    'users.name',
+                    'users.full_name',
+                    'users.address',
+                    'users.telegram',
+                    'users.wa',
+                    'users.email',
+                    'users.role_id',
+                    'users.password',
+                    'roles.name as role_name',
+                )
                 ->with('role')
                 ->leftJoin('roles', 'users.role_id', '=', 'roles.id');
 
@@ -156,6 +167,10 @@ class UserController extends Controller
             $user->location_id = request("location_id");
             $user->email = request("email");
             $user->role_id = request("role_id");
+            $user->full_name = request("full_name");
+            $user->address = request("address");
+            $user->telegram = request("telegram");
+            $user->wa = request("wa");
             $user->save();
 
             $role = Role::find(request("role_id"));

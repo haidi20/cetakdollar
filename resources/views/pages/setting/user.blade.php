@@ -88,6 +88,10 @@
             $("#id").val(data.id);
             $("#name").val(data.name);
             $("#email").val(data.email);
+            $("#full_name").val(data.full_name);
+            $("#address").val(data.address);
+            $("#telegram").val(data.telegram);
+            $("#wa").val(data.wa);
             $("#location_id").val(data.location_id).trigger("change");
             $("#role_id").val(data.role_id).trigger("change");
 
@@ -229,6 +233,10 @@
 
             $("#name").val("");
             $("#email").val("");
+            $("#full_name").val("");
+            $("#address").val("");
+            $("#telegram").val("");
+            $("#wa").val("");
             $("#role_id").val("").trigger("change");
 
         }

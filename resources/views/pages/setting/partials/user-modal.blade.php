@@ -20,13 +20,38 @@
                     <div class="form-group row">
                         <label for="password" class="col-sm-4 col-form-label">Sandi </label>
                         <div class="col-sm-8">
-                            <input type="password" id="password" name="password" class="form-control">
+                            <input type="password" id="password" name="password" class="form-control"
+                                autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="email" class="col-sm-4 col-form-label">Email </label>
                         <div class="col-sm-8">
                             <input type="email" id="email" name="email" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="full_name" class="col-sm-4 col-form-label">Nama Lengkap </label>
+                        <div class="col-sm-8">
+                            <input type="text" id="full_name" name="full_name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="address" class="col-sm-4 col-form-label">Alamat </label>
+                        <div class="col-sm-8">
+                            <input type="text" id="address" name="address" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="telegram" class="col-sm-4 col-form-label">Telegram </label>
+                        <div class="col-sm-8">
+                            <input type="text" id="telegram" name="telegram" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="wa" class="col-sm-4 col-form-label">No. Whatsapp </label>
+                        <div class="col-sm-8">
+                            <input type="text" id="wa" name="wa" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">

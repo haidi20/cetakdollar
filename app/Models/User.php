@@ -32,6 +32,10 @@ class User extends Authenticatable
         'name',
         'role_id',
         'email',
+        'full_name',
+        'address',
+        'telegram',
+        'wa',
         'password',
     ];
 

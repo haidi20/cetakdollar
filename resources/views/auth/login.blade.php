@@ -8,7 +8,7 @@
                 <div class="card mx-auto mb-0">
                     <div class="card-body">
                         <h1 class="auth-title" style="font-size: 1.8rem;margin: 0rem 0rem 1.5rem;text-align: center; border-bottom: 1px solid #eee;
-                        padding-bottom: 1rem;">HRIS - KPT
+                        padding-bottom: 1rem;">CETAK DOLLAR
                         </h1>
                         <form method="POST" action="{{ route('login') }}">
                             @csrf

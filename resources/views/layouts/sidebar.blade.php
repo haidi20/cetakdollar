@@ -12,10 +12,10 @@
             </div> --}}
             <div class=" d-flex flex-column align-items-center logo">
                 <div>
-                    <img src="{{ asset('assets/img/logo.png') }}" alt="" style="height: 5rem !important;">
+                    {{-- <img src="{{ asset('assets/img/logo.png') }}" alt="" style="height: 5rem !important;"> --}}
                 </div>
-                <div class="fw-bold mt-2 ms-3" style="font-size: 1.5rem;">HRIS-KPT</div>
-                <span style="font-size: 10px;">Human Resource Information System</span>
+                <div class="fw-bold mt-2 ms-3" style="font-size: 1.5rem;">Cetak Dollar</div>
+                {{-- <span style="font-size: 10px;">Human Resource Information System</span> --}}
             </div>
             <div class="theme-toggle d-flex gap-2  align-items-center mt-2 d-none">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"

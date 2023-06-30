@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>HRIS - KPT</title>
+    <title>CETAK DOLLAR</title>
 
     {{-- FAVICON --}}
     <link rel="shortcut icon" href="{{ asset('assets/img/logo.ico') }}" type="image/x-icon">

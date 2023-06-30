@@ -1,0 +1,26 @@
+/* Untuk perangkat dengan lebar layar kurang dari atau sama dengan 480px */
+@media only screen and (max-width: 480px) {
+    /* Gaya CSS khusus untuk perangkat dengan lebar layar <= 480px */
+    div.dt-buttons {
+           float: none;
+           /* text-align: center; */
+           text-align: center;
+           display: inline-block;
+           margin: 1rem;
+    }
+}
+
+/* Untuk perangkat dengan lebar layar antara 481px dan 768px */
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+    /* Gaya CSS khusus untuk perangkat dengan lebar layar 481px - 768px */
+}
+
+/* Untuk perangkat dengan lebar layar antara 769px dan 1024px */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    /* Gaya CSS khusus untuk perangkat dengan lebar layar 769px - 1024px */
+}
+
+/* Untuk perangkat dengan lebar layar lebih besar dari 1024px */
+@media only screen and (min-width: 1025px) {
+    /* Gaya CSS khusus untuk perangkat dengan lebar layar >= 1025px */
+}

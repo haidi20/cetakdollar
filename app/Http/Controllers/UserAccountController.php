@@ -175,9 +175,9 @@ class UserAccountController extends Controller
             DB::beginTransaction();
 
             $userAccount = UserAccount::find(request("id"));
-            $userAccount->update([
-                'deleted_by' => Auth::user()->id,
-            ]);
+            // $userAccount->update([
+            //     'deleted_by' => Auth::user()->id,
+            // ]);
             $userAccount->delete();
 
             DB::commit();

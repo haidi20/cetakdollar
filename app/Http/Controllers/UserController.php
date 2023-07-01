@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Route;
 use Yajra\DataTables\DataTables;
 use Spatie\Permission\Models\Role;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class UserController extends Controller
 {
@@ -133,23 +135,21 @@ class UserController extends Controller
         return view("pages.setting.user", $compact);
     }
 
-    // public function index()
-    // {
-    // $userRoleId = auth()->user()->role_id;
+    public function authenticate(Request $request)
+    {
 
-    // $roles = new Role;
-    // $users = new User;
+        $credentials = $request->only('email', 'password');
 
-    // if ($userRoleId != 1) {
-    //     $roles = $roles->where("id", "!=", 1);
-    //     $users = $users->where("id", "!=", 1);
-    // }
+        try {
+            if (!$token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'invalid_credentials'], 400);
+            }
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'could_not_create_token'], 500);
+        }
 
-    //     $roles = $roles->get();
-    //     $users = $users->get();
-
-    //     return view("pages.setting.user", compact("users", "roles"));
-    // }
+        return response()->json(compact('token'));
+    }
 
     public function fetchPermission()
     {

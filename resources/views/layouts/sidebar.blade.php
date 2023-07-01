@@ -83,6 +83,14 @@
                         </a>
                     </li>
                 @endcan
+                @can('lihat akun pengguna')
+                    <li class="sidebar-item {{ isActive('user-account') }}">
+                        <a class='sidebar-link' href="{{ route('userAccount.index') }}">
+                            <i class="bi bi-person-circle"></i>
+                            <span>Akun Pengguna</span>
+                        </a>
+                    </li>
+                @endcan
                 @can('lihat fitur')
                     <li class="sidebar-item {{ isActive('feature') }}">
                         <a class='sidebar-link' href="{{ route('feature.index') }}">

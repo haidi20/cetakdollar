@@ -25,6 +25,10 @@ class UserController extends Controller
             'name' => ['name' => 'name', 'title' => 'Nama'],
             'role_name' => ['name' => 'role_name', 'title' => 'Grup Pengguna'],
             'email' => ['name' => 'email', 'title' => 'Email'],
+            'full_name' => ['name' => 'full_name', 'title' => 'Nama Lengkap'],
+            'address' => ['name' => 'address', 'title' => 'Alamat'],
+            'telegram' => ['name' => 'telegram', 'title' => 'Telegram'],
+            'wa' => ['name' => 'wa', 'title' => 'No. Whatsapp'],
             'aksi' => [
                 'orderable' => false, 'width' => '110px', 'searchable' => false, 'printable' => false, 'class' => 'text-center', 'width' => '130px', 'exportable' => false
             ],
@@ -63,6 +67,22 @@ class UserController extends Controller
                 })
                 ->filterColumn('email', function (Builder $query, $keyword) {
                     $sql = "users.email  like ?";
+                    $query->whereRaw($sql, ["%{$keyword}%"]);
+                })
+                ->filterColumn('telegram', function (Builder $query, $keyword) {
+                    $sql = "users.telegram  like ?";
+                    $query->whereRaw($sql, ["%{$keyword}%"]);
+                })
+                ->filterColumn('wa', function (Builder $query, $keyword) {
+                    $sql = "users.wa  like ?";
+                    $query->whereRaw($sql, ["%{$keyword}%"]);
+                })
+                ->filterColumn('full_name', function (Builder $query, $keyword) {
+                    $sql = "users.full_name  like ?";
+                    $query->whereRaw($sql, ["%{$keyword}%"]);
+                })
+                ->filterColumn('address', function (Builder $query, $keyword) {
+                    $sql = "users.address  like ?";
                     $query->whereRaw($sql, ["%{$keyword}%"]);
                 })
                 ->addColumn('aksi', function (User $data) {
@@ -164,7 +184,6 @@ class UserController extends Controller
             }
 
             $user->name = request("name");
-            $user->location_id = request("location_id");
             $user->email = request("email");
             $user->role_id = request("role_id");
             $user->full_name = request("full_name");

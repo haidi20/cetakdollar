@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
-    @include('pages.setting.partials.user-modal')
+    @include('pages.setting.partials.user-account-modal')
     <div class="page-heading">
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Pengguna</h3>
+                    <h3>Akun Pengguna</h3>
                     {{-- <p class="text-subtitle text-muted">For user to check they list</p> --}}
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
@@ -14,7 +14,7 @@
                         <ol class="breadcrumb">
                             {{-- <li class="breadcrumb-item"><a href="{{ route('setting.permission.index') }}">Fitur</a>
                         </li> --}}
-                            <li class="breadcrumb-item active" aria-current="page">Pengguna</li>
+                            <li class="breadcrumb-item active" aria-current="page">Akun Pengguna</li>
                         </ol>
                     </nav>
                 </div>
@@ -23,17 +23,10 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    {{-- <span class="fs-4 fw-bold">Data Karyawan</span> --}}
-                    @can('lihat grup pengguna')
-                        <a href="{{ route('role.index') }}" class="btn btn-sm btn-primary shadow-sm float-end ml-2"
-                            id="addData" data-toggle="modal">
-                            Grup Pengguna
-                        </a>
-                    @endcan
                     @can('tambah pengguna')
                         <button onclick="onCreate()" class="btn btn-sm btn-success shadow-sm float-end ml-2" id="addData"
                             data-toggle="modal">
-                            <i class="fas fa-plus text-white-50"></i> Tambah Pengguna
+                            <i class="fas fa-plus text-white-50"></i> Tambah Akun
                         </button>
                     @endcan
                 </div>
@@ -78,7 +71,7 @@
 
         function onCreate() {
             clearForm();
-            $("#titleForm").html("Tambah Pengguna");
+            $("#titleForm").html("Tambah Akun");
             onModalAction("formModal", "show");
         }
 
@@ -86,15 +79,16 @@
             // console.info(data);
             clearForm();
             $("#id").val(data.id);
-            $("#name").val(data.name);
-            $("#email").val(data.email);
-            $("#full_name").val(data.full_name);
-            $("#address").val(data.address);
-            $("#telegram").val(data.telegram);
-            $("#wa").val(data.wa);
-            $("#role_id").val(data.role_id).trigger("change");
+            $("#account_number").val(data.account_number);
+            $("#server_trade").val(data.server_trade);
+            $("#password_trading").val(data.password_trading);
+            $("#password_investor").val(data.password_investor);
+            $("#vps_location").val(data.vps_location);
+            $("#key_generate").val(data.key_generate);
+            $("#key_expired").val(data.key_expired);
+            $("#user_id").val(data.user_id).trigger("change");
 
-            $("#titleForm").html("Ubah Pengguna");
+            $("#titleForm").html("Ubah Akun");
             onModalAction("formModal", "show");
         }
 
@@ -104,7 +98,7 @@
                 let fd = new FormData(this);
 
                 $.ajax({
-                    url: "{{ route('user.store') }}",
+                    url: "{{ route('userAccount.store') }}",
                     method: 'POST',
                     data: fd,
                     cache: false,
@@ -163,7 +157,7 @@
         function onDelete(data) {
             Swal.fire({
                 title: 'Perhatian!!!',
-                html: `Anda yakin ingin hapus data pengguna <h2><b> ${data.name} </b> ?</h2>`,
+                html: `Anda yakin ingin hapus data akun <h2><b> ${data.user_namee} - ${data.account_number} </b> ?</h2>`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -173,7 +167,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{ route('user.delete') }}",
+                        url: "{{ route('userAccount.delete') }}",
                         method: 'DELETE',
                         dataType: 'json',
                         data: {
@@ -229,16 +223,14 @@
         }
 
         function clearForm() {
-
-            $("#id").val("");
-            $("#name").val("");
-            $("#email").val("");
-            $("#full_name").val("");
-            $("#address").val("");
-            $("#telegram").val("");
-            $("#wa").val("");
-            $("#role_id").val("").trigger("change");
-
+            $("#account_number").val("");
+            $("#server_trade").val("");
+            $("#password_trading").val("");
+            $("#password_investor").val("");
+            $("#vps_location").val("");
+            $("#key_generate").val("");
+            $("#key_expired").val("");
+            $("#user_id").val("").trigger("change");
         }
     </script>
 @endsection

@@ -27,6 +27,7 @@ class JwtMiddleware extends BaseMiddleware
             // $check_token = Participant::where('token', $token)->count();
             if ($checkToken == 0) {
                 $res['success'] = false;
+                // $res['data'] = $checkToken;
                 $res['message'] = 'Permission not allowed!';
 
                 return response($res);

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\PresetController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,5 +30,8 @@ Route::prefix("v1")->name("api.")->middleware("jwt.verify")->group(function () {
     Route::prefix('history')->name('history.')->group(function () {
         Route::get('', [HistoryController::class, "fetchData"])->name('fetchData');
         Route::post('', [HistoryController::class, "store"])->name('store');
+    });
+    Route::prefix('preset')->name('preset.')->group(function () {
+        Route::post('', [PresetController::class, "store"])->name('store');
     });
 });

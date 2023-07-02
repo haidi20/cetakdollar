@@ -15,6 +15,11 @@ class CreatePresetsTable extends Migration
     {
         Schema::create('presets', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->string('code', 20);
+            $table->text('preset');
+            $table->date('date_start');
+            $table->date('date_end');
             $table->timestamps();
         });
     }

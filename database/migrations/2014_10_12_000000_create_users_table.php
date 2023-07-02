@@ -23,7 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('wa')->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->rememberToken();
+            // $table->rememberToken();
+            $table->text("remember_token")->nullable();
             $table->foreignId('created_by')->nullable();
             $table->foreignId('updated_by')->nullable();
             $table->foreignId('deleted_by')->nullable();

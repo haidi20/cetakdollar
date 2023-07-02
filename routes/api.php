@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // });
 Route::get('login', [UserController::class, 'authenticate']);
 
-Route::prefix("v1")->name("api.")->group(function () {
-    //
+Route::prefix("v1")->name("api.")->middleware("jwt.verify")->group(function () {
+    Route::prefix('history')->name('history.')->group(function () {
+        Route::get('', [HistoryController::class, "fetchData"])->name('fetchData');
+        Route::post('', [HistoryController::class, "store"])->name('store');
+    });
 });

@@ -58,7 +58,7 @@ class HistoryController extends Controller
             DB::commit();
 
             return response()->json([
-                'success' => true,
+                'status' => true,
                 'data' => [],
                 'message' => "Berhasil {$message}",
             ], 200);
@@ -72,7 +72,7 @@ class HistoryController extends Controller
             $log->store($e->getMessage(), $routeAction);
 
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'message' => "Gagal {$message}",
             ], 500);
         }

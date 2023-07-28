@@ -39,8 +39,8 @@ class PresetController extends Controller
             DB::commit();
 
             return response()->json([
-                'success' => true,
-                'data' => [],
+                'status' => true,
+                'data' => $preset->preset,
                 'message' => "Berhasil {$message}",
             ], 200);
         } catch (\Exception $e) {
@@ -53,7 +53,7 @@ class PresetController extends Controller
             $log->store($e->getMessage(), $routeAction);
 
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'message' => "Gagal {$message}",
             ], 500);
         }
